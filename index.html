@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
+    <!-- Add this to the head of your HTML document 
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> 
+   -->
+    <link rel="stylesheet" href="css/indexPage.css">
+    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <title>Task Master</title>
+  </head>
+  <body class="m-3">
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col-sm-1 col-xs-12 text-center">
+          <img src="images/logo.jpg" width = "60px" height = "50px" alt="logo" >
+        </div>
+        <div class="col-sm-11  col-xs-12 text-center">
+          <h1> Task Master </h1>     
+        </div>
+      </div>
+      
+     
+    </div>
+                 
+      
+                  <nav class="navbar navbar-expand-lg navbar-light  bg-light">
+                    <div class=" container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navMenu">
+                        <ul class="navbar-nav">
+                            <li class="nav-item ">
+                              <a class="nav-link active  h5" href="#"  id="dashboardLink" data-bs-toggle="collapse" data-bs-target="#dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  h5" href="#"  id="doneLink" data-bs-toggle="collapse" data-bs-target="#done">Completed Tasks</a>
+                            </li>
+                            </ul>
+                    </div>
+                    </div>
+                    </nav>
+
+
+              
+
+                    <div class="container-fluid" id="filterMenu">
+                      <div class = "row justify-content-end">
+                        <div class="col-md-3 col-xs-12">
+                            <input type="text" id="search" class="form-control mt-2" placeholder="Search By Task Name">
+                        </div>
+                          <div class="col-auto">
+                            
+                              <button class="btn btn-secondary dropdown-toggle mt-2" type="button" id="sortButton" data-bs-toggle="dropdown">
+                                Sort by date
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" id="ascending" href="#">Ascending</a></li>
+                                <li><a class="dropdown-item" id="descending" href="#">Descending</a></li>
+                                <li><a class="dropdown-item" id="removesort" href="#">Remove sort</a></li>
+                              </ul>
+                           
+                          
+                           </div>
+                           <div class="col-auto">
+                            
+                              <button class="btn btn-secondary dropdown-toggle mt-2" type="button" id="filterButton" data-bs-toggle="dropdown">
+                                Group By
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" id="categoryFilter" href="#">Category</a></li>
+                                <li><a class="dropdown-item" id="priorityFilter" href="#">Priority</a></li>
+                                <li><a class="dropdown-item" id="removeFilter" href="#">Remove Group</a></li>
+                              </ul>
+                          
+                           </div>
+           
+                      </div>
+                  </div>
+
+
+                  <div class="container-fluid collapse show" id="dashboard">
+                    <div id="sql" class="table-responsive">
+                      <table class="table dashBoardTable table-striped mt-2">
+                        <tr>
+                          <th>Task name</th>
+                          <th> Description </th>
+                          <th> Status </th>
+                          <th> Category </th>
+                          <th> Priority </th>
+                          <th> Due date </th>
+                        </tr>
+                        <tr>
+                          <td>Task1</td>
+                          <td> Task description </td>
+                          <td> New </td>
+                          <td> Personal </td>
+                          <td> High </td>
+                          <td> 2023/05/10 </td>
+                        </tr>
+                      </table>
+                  </div>
+                  
+
+                  </div>
+
+                  <div class="container-fluid collapse" id="done">
+                    <div id="donesql" class="table-responsive">
+                      <table class="table doneTable table-striped  mt-2">
+                        <tr>
+                          <th>Task name</th>
+                          <th> Description </th>
+                          <th> Status </th>
+                          <th> Category </th>
+                          <th> Priority </th>
+                          <th> Due date </th>
+                        </tr>
+                        <tr>
+                          <td>Task1</td>
+                          <td> Task description </td>
+                          <td> Done </td>
+                          <td> Personal </td>
+                          <td> High </td>
+                          <td> 2023/05/10 </td>
+                        </tr>
+                      </table>
+                  </div>
+         
+                </div>
+
+              <div id="group" class="table-responsive m-3">
+
+              </div>
+              <button class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 mb-3 me-3" type="button" id="addButton" data-bs-toggle="modal" data-bs-target="#addTaskModal" data-bs-toggle="tooltip" title="Add task">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+              </button>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="addTaskModal" tabindex="-1"  data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTaskModalTitle">New Task</h5>
+        </div>
+        <div class="modal-body">
+            <form class= "form" id="modalForm">
+                <div class="form-group row m-1">
+                    <div class="col-4">
+                        <label for="categoryDropDown"> Category</label>
+                        </div>
+                        <div class="col">  
+                                <select class="form-select" id="categoryDropDown">
+                                  <option>Personal</option>
+                                  <option>Work</option>
+                                  <option>Family</option>
+                                  <option>Shopping</option>
+                                  <option>Travel</option>
+                                </select>
+                              </div>
+                </div>
+                <div class="form-group row m-1">
+                  <div class="col-4">
+                      <label for="priorityDropDown"> Priority</label>
+                      </div>
+                      <div class="col">  
+                              <select class="form-select" id="priorityDropDown">
+                                <option>Low</option>
+                                <option>Normal</option>
+                                <option>High</option>
+                              </select>
+                            </div>
+              </div>
+                <div class="form-group row m-1">
+                    <div class="col-4">
+                    <label for="taskName"class="form-label"> Task Name</label>
+                    </div>
+                    <div class="col">
+                    <input type="text" class="form-control" id="taskName" placeholder="Task Name">
+                     </div>
+                </div>
+                <div class="form-group row m-1">
+                    <div class="col-4">
+                    <label for="description" class="form-label"> Description</label>
+                </div>
+                    <div class="col">
+                    <input type="text" class="form-control" id="description">
+                    </div>
+                </div>
+                <div class="form-group row m-1">
+                    <div class="col-4">
+                    <label for="dueDate" class="form-label"> Due Date</label>
+                </div>
+                    <div class="col">
+                    <input type="date" class="form-control" id="dueDate">
+                    </div>
+                </div>
+                <div class="form-group row m-1">
+                  <div class="container error text-danger">
+                  
+                  </div>
+              </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary"  id = "saveButton" data-bs-dismiss="modal" disabled>Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <!-- Bootstrap JavaScript 
+   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  -->
+    <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sql.js@1.8.0/dist/sql-wasm.min.js"></script> 
+   <!-- <script src="javascript/localforage.min.js"></script>
+    <script src="javascript/sql-wasm.js"></script>-->
+    <script src="javascript/boilerplate.js"></script>
+    <script src="javascript/indexPage.js"></script>
+</body>
+</html>
